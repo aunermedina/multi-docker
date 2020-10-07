@@ -15,5 +15,9 @@ after_success:
     - docker build -t aunermedina/multi-server ./server
     - docker build -t aunermedina/mult-worker ./worker
     # Log in to the docker CLI
-
-    # take those images
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # take those images and push them to docker hub
+    - docker push aunermedina/multi-client
+    - docker push aunermedina/multi-nginx
+    - docker push aunermedina/multi-server
+    - docker push aunermedina/multi-worker
